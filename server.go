@@ -2,16 +2,27 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
-func main() {
-	http.HandleFunc("/", postHandler)
-	log.Println("Server is listening...")
-	http.ListenAndServe(":8080", nil)
+var serverPort = ":8080"
+
+func HomeHandler(writer http.ResponseWriter, request *http.Request) {
+	fmt.Fprintln(writer, "Hello world!")
 }
 
-func postHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Hello world!")
+func InfoHandler(writer http.ResponseWriter, request *http.Request) {
+	fmt.Fprintln(writer, "Some info!")
+}
+
+func main() {
+	router := mux.NewRouter()
+	router.HandleFunc("/", HomeHandler)
+	router.HandleFunc("/info", InfoHandler)
+	http.Handle("/", router)
+
+	fmt.Printf("Server is listening ...\n")
+	http.ListenAndServe(serverPort, nil)
 }

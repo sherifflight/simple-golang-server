@@ -10,7 +10,7 @@ import (
 var serverPort = ":8080"
 
 func HomeHandler(writer http.ResponseWriter, request *http.Request) {
-	fmt.Fprintln(writer, "Hello world!")
+	http.ServeFile(writer, request, "public/pages/index.html")
 }
 
 func InfoHandler(writer http.ResponseWriter, request *http.Request) {

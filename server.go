@@ -19,8 +19,10 @@ func InfoHandler(writer http.ResponseWriter, request *http.Request) {
 
 func main() {
 	router := mux.NewRouter()
+
 	router.HandleFunc("/", HomeHandler)
 	router.HandleFunc("/info", InfoHandler)
+
 	http.Handle("/", router)
 
 	fmt.Printf("Server is listening ...\n")

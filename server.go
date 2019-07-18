@@ -21,10 +21,6 @@ type User struct {
 var database *sql.DB
 var serverPort = ":8080"
 
-func HomeHandler(writer http.ResponseWriter, request *http.Request) {
-	http.ServeFile(writer, request, "public/pages/index.html")
-}
-
 func getUsersHandler(writer http.ResponseWriter, request *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
 	var users []User
